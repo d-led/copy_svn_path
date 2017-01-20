@@ -32,13 +32,13 @@ namespace copy_svn_path
             return url;
         }
 
-        private static string ExtractUrl(string svn_output)
+        static string ExtractUrl(string svn_output)
         {
             var url_extractor = new Regex("^URL:\\s*(.*)$", RegexOptions.Compiled | RegexOptions.Multiline);
             var match = url_extractor.Match(svn_output);
             if (match.Success)
             {
-                var group=match.Groups[1].Value;
+                var group = match.Groups[1].Value;
                 return group.ToString().Trim();
             }
             else

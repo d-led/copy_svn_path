@@ -20,10 +20,22 @@ namespace copy_svn_path
         public static void SetText(string text)
         {
             OpenClipboard(IntPtr.Zero);
-            var ptr = Marshal.StringToHGlobalUni(text);
-            SetClipboardData(13, ptr);
-            CloseClipboard();
-            Marshal.FreeHGlobal(ptr);
+            IntPtr ptr = IntPtr.Zero;
+            try
+            {
+                ptr = Marshal.StringToHGlobalUni(text);
+                SetClipboardData(13, ptr);
+                CloseClipboard();
+            }
+            finally
+            {
+                try
+                {
+                    if (ptr != IntPtr.Zero)
+                        Marshal.FreeHGlobal(ptr);
+                }
+                catch { /*swallow*/ }
+            }
         }
     }
 }

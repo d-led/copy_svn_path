@@ -31,7 +31,7 @@ namespace copy_svn_path
             }
         }
 
-        private static void CopyPathToClipboard(string dir)
+        static void CopyPathToClipboard(string dir)
         {
             try
             {
